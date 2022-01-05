@@ -1,5 +1,5 @@
 const yargs = require("yargs");
-const { addMovie } = require("./utils/index");
+const { addMovie, listMovies } = require("./utils/index");
 const fs = require("fs");
 
 const app = () => {
@@ -7,12 +7,19 @@ const app = () => {
     let movieArr;
     try {
       const movieArr = JSON.parse(fs.readfileSync(`./storage.json`));
+      console.log(movieArr);
     } catch (error) {
       movieArr = [];
+      console.log(movieArr);
     }
     try {
-      if (yargs.argv.add) {
-        console.log(yargs.argv.title);
+      if (process.argv[2] === `add`) {
+        addMovie(movieArr, {
+          title: yargs.argv.title,
+          actor: yargs.argv.actor,
+        });
+      } else if (process.argv[2] === `list`) {
+        listMovies();
       }
     } catch (error) {
       console.log(error);

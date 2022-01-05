@@ -10,6 +10,14 @@ const addMovie = (movieArr, movieObj) => {
   }
 };
 
+const listMovies = () => {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   addMovie,
+  listMovies,
 };
