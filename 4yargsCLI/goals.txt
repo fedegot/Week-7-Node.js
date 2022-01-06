@@ -1,0 +1,6 @@
+For this afternoons task please add the following to your yargsCLI app:
+     A function that allows for an update of an single movie entry in your storage.json file,
+     A function that allows for the deletion of a single movie entry in your storage.json file,
+
+Stretch goal:
+     A function that lists a single movie entry from your storage.json file
