@@ -1,51 +1,52 @@
 const fs = require("fs");
+const Movie = require("../models/models");
 
-const addMovie = async (collection, movieObj) => {
+const addMovie = async (movieObj) => {
   try {
-    await collection.insertOne(movieObj);
-    console.log(`successfully added ${movieObj.title}.`);
+    const newMovies = new Movie(movieObj);
+    return await newMovies.save();
   } catch (error) {
     console.log(error);
   }
 };
 
-const listMovies = async (collection) => {
+const listMovies = async () => {
   try {
-    const cursor = await collection.find({});
-    const movieArr = await cursor.toArray();
-    console.log(movieArr);
+    const cursor = await Movie.find({});
+    console.log(cursor);
   } catch (error) {
     console.log(error);
   }
 };
 
-const updateMovie = async (collection, updateObj) => {
+const updateMovie = async (updateMovie) => {
   try {
-    await collection.updateOne(
-      { title: updateObj.title },
-      { $set: { title: updateObj.updateValue } }
+    const movie = await Movie.updateOne(
+      { title: updateMovie.title },
+      { title: updateMovie.updateTitle },
+      { new: true }
     );
-    console.log(`its been update`);
+    console.log(`${updateMovie} has been update to ${movie.title}`);
   } catch (error) {
     console.log(error);
   }
 };
 
 //delete name of the movie from the list
-const deleteItemN = async (collection, deleteObj) => {
+const deleteItemN = async (deleteObj) => {
   try {
-    await collection.deleteOne({ title: deleteObj.title });
-    console.log(`the ${deleteObj.title} has been canceled`);
+    await Movie.deleteOne(deleteObj);
+    console.log(`the actor has been canceled from the list`);
   } catch (error) {
     console.log(error);
   }
 };
 
 //delete name of the movie from the list
-const deleteItemA = async (collection, deleteObj) => {
+const deleteItemA = async (deleteObj) => {
   try {
-    await collection.deleteOne({ actor: deleteObj.actor });
-    console.log(`the ${deleteObj.actor} has been canceled`);
+    await Movie.deleteOne(deleteObj);
+    console.log(`the actor has been canceled from the list`);
   } catch (error) {
     console.log(error);
   }
