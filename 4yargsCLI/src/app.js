@@ -8,6 +8,7 @@ const {
   breakLine,
 } = require("./utils/index");
 const connection = require("./db/connection");
+const close = require("./db/connection");
 const Movie = require("./models/models");
 
 const command = yargs.argv._[0]; ///
@@ -39,7 +40,7 @@ const app = async (args) => {
         updateTitle: args.updateTitle,
       });
     }
-    
+
     // if (command === "info") {
     //   console.log(
     //     " --add : add a list of movie \n --list : print list of movie \n --updateN : add a movie in the list \n --deleteN : delete name of the movie from the list \n --deleteA : remove actor from the list"
